@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.plugin.KotlinTargetHierarchy.SourceSetTree.Companion.test
-
 plugins {
     kotlin("jvm") version "1.9.22"
     id("maven-publish")
@@ -27,7 +25,7 @@ tasks.named<Test>("test") {
 }
 
 kotlin {
-    jvmToolchain(8)
+    jvmToolchain(19)
 }
 
 publishing {

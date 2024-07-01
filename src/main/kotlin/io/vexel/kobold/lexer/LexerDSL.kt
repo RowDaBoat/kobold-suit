@@ -22,4 +22,6 @@ class LexerDSL(
     NotOperatorDSL by NotOperator(),
     OptionalOperatorDSL by OptionalOperator() {
     val anything = Anything()
+    val newline = "\n" or "\r\n"
+    val spaces = " " or "\t"
 }

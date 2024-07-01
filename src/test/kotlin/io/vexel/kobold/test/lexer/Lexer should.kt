@@ -6,6 +6,7 @@ import io.vexel.kobold.test.tokens.Number
 import org.junit.jupiter.api.Test
 import java.util.*
 import kotlin.test.assertEquals
+import kotlin.test.assertNotEquals
 
 class `Lexer should` {
     @Test
@@ -33,7 +34,7 @@ class `Lexer should` {
     fun `properly process line and column numbers` () {
         val lexer = lexer {
             "@".oneOrMore() with { Ats(it) }
-            ignore(" " or "\n")
+            ignore(newline or spaces)
         }
 
         val text = """
@@ -74,6 +75,36 @@ class `Lexer should` {
         val tokens = lexer.tokenize("@")
         val expected = listOf(Ats("@",  "@", 1, 1, 0, 1))
         assertEquals(expected, tokens)
+    }
+
+    @Test
+    fun `match newlines from both conventions`() {
+        val text = "@@@\r\n@@@\n@@@".trimIndent()
+
+        val lexer = lexer {
+            "@" with { Ats(it) }
+            ignore(newline)
+        }
+
+        val tokens = lexer.tokenize(text)
+
+        assert(tokens.all { it.text == "@" })
+        assertEquals(9, tokens.count())
+    }
+
+    @Test
+    fun `match spaces and tabs`() {
+        val text = "@\t   \t@ @\t@".trimIndent()
+
+        val lexer = lexer {
+            "@" with { Ats(it) }
+            ignore(spaces)
+        }
+
+        val tokens = lexer.tokenize(text)
+
+        assert(tokens.all { it.text == "@" })
+        assertEquals(4, tokens.count())
     }
 
     class Ats(

@@ -8,16 +8,16 @@ DONE cleanup repositories
     DONE implement a Rejection Reason
 
 [ Lexer ]
-    TODO support pre-made matchers
-        whitespaces
-        newlines
-        DONE "AnyOperator" should be renamed to something less misleading
-        DONE change "any" to "anything"
     TODO return a result accepting or rejecting the tokenized string, consider cases:
         Unexpected tokens
         No remaining tokens
         Trailing tokens
     TODO matching is done for every rule, for every token, it could probably be done more efficiently with a DFA
+    DONE support pre-made matchers
+        DONE whitespaces
+        DONE newlines
+        DONE "AnyOperator" should be renamed to something less misleading
+        DONE change "any" to "anything"
     DONE test rule order
     DONE bug: lexer is not taking the longest match
     DONE add a reference to the corresponding line text to each token
