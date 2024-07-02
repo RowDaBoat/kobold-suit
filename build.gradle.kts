@@ -25,7 +25,7 @@ tasks.named<Test>("test") {
 }
 
 kotlin {
-    jvmToolchain(19)
+    jvmToolchain(17)
 }
 
 publishing {
